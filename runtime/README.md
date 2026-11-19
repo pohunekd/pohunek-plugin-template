@@ -15,12 +15,16 @@ Install by id (after admission): `pohunek plugin install pohunek.runtime.example
 ## Local checks
 
 Run these from the repository root (a checkout of the core tag under
-`../core` provides the kit and the daemon binaries the smoke reads):
+`../core` provides the kit and the daemon binaries the smoke reads;
+build them first, as the CI does):
 
 ```sh
+(cd ../core && cargo build --locked -p pohunek-plugin-kit --features daemon)
+(cd ../core && cargo build --locked -p pohunek-cli -p pohunek-daemon -p pohunek-session-worker)
 export UPSTREAM_BIN="$PWD/upstream-bin"
 bash scripts/install-upstream.sh
 ../core/target/debug/pohunek-plugin-kit lint --dir package
+rm -rf build-one build-two dist release-dir
 mkdir -p build-one build-two dist
 ../core/target/debug/pohunek-plugin-kit build --dir package --output-dir build-one
 ../core/target/debug/pohunek-plugin-kit build --dir package --output-dir build-two

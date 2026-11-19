@@ -16,10 +16,12 @@ Install by id (after admission): `pohunek plugin install pohunek.context.example
 ## Local checks
 
 Run these from the repository root (a checkout of the core tag under
-`../core` provides the kit):
+`../core` provides the kit; build it first, as the CI does):
 
 ```sh
+(cd ../core && cargo build --locked -p pohunek-plugin-kit --features daemon)
 ../core/target/debug/pohunek-plugin-kit lint --dir package
+rm -rf build-one build-two dist
 mkdir -p build-one build-two dist
 ../core/target/debug/pohunek-plugin-kit build --dir package --output-dir build-one
 ../core/target/debug/pohunek-plugin-kit build --dir package --output-dir build-two

@@ -29,12 +29,10 @@ if [ -z "$version" ]; then
   echo "install-upstream.sh: no release in compat/RELEASE" >&2
   exit 1
 fi
-case "$version" in
-  *[^0-9.]* | "" | *..* | .* | *.)
-    echo "install-upstream.sh: invalid release '$version' in compat/RELEASE (want MAJOR.MINOR.PATCH)" >&2
-    exit 1
-    ;;
-esac
+if ! [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "install-upstream.sh: invalid release '$version' in compat/RELEASE (want MAJOR.MINOR.PATCH)" >&2
+  exit 1
+fi
 
 cat > "$UPSTREAM_BIN/example" <<EOF
 #!/bin/sh

@@ -1,0 +1,7 @@
+# Local check artefacts (see "Local checks" in README.md). The CI builds
+# these directories on every run instead of checking them in.
+upstream-bin/
+build-one/
+build-two/
+dist/
+release-dir/

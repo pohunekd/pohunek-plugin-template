@@ -31,22 +31,22 @@ package takes `pohunek-plugin` only).
   `scripts/install-upstream.sh` before the smoke.
 - `context/` is a context package skeleton: a manifest-only descriptor
   (`package/runtime.toml`) in the shape of the core context fixture, a
-  `bundle/` directory of exported files, the index claim and the CI and
-  release workflows. It has no runtime, no detection manifest, no upstream
-  lock and no screen corpus.
+  `bundle/` directory of exported files, a `.gitignore` for the local check
+  artefacts, the index claim and the CI and release workflows. It has no
+  runtime, no detection manifest, no upstream lock and no screen corpus.
 
 ## How to use this template
 
 1. Create the repository from this template (the owner creates `pohunekd/*` repositories).
-2. Move the chosen variant's contents, including `.github/`, `.pohunek-plugin/`
-   and `scripts/` (runtime), to the repository root. From a checkout of this
-   template run `git archive HEAD <variant> | tar -x --strip-components=1 -C
-   <repo>`, or copy with `cp -r <variant>/. <repo>/` from a plain tree copy.
+2. Move the chosen variant's contents, including `.github/`, `.pohunek-plugin/`,
+   `.gitignore` and `scripts/` (runtime), to the repository root. From a checkout
+   of this template run `git archive HEAD <variant> | tar -x --strip-components=1
+   -C <repo>`, or copy with `cp -r <variant>/. <repo>/` from a plain tree copy.
    The variant's `README.md` lands at the root and replaces this root README;
    also copy `CHANGELOG.md`, `LICENSE` and `CORE_TAG` from the template root
    into the new repository. Delete both variant directories (`rm -rf runtime
-   context`) so the root holds `package/`, `.github/`, `.pohunek-plugin/`
-   (plus `corpus/`, `compat/`, `scripts/` for the runtime variant).
+   context`) so the root holds `package/`, `.github/`, `.pohunek-plugin/`,
+   `.gitignore` (plus `corpus/`, `compat/`, `scripts/` for the runtime variant).
 3. Replace every `example` placeholder (and its capitalised and upper-case forms
    where they appear):
    - the repository name (`pohunekd/plugin-example`);
@@ -114,6 +114,8 @@ actions):
   deployment branch and tag rule; set the tag rule to `v*` so only `v*` refs
   may use the environment;
 - immutable releases on;
+- the `.gitignore` from the variant (it lists the local check artefacts
+  `upstream-bin/`, `build-one/`, `build-two/`, `dist/`, `release-dir/`);
 - no secrets in the repository;
 - `id-token: write` and `attestations: write` only in the release job.
 
