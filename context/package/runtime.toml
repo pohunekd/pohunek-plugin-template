@@ -1,0 +1,15 @@
+# Example context descriptor of the template plugin.
+#
+# Copy of the core context fixture shape: a package that exports a directory
+# of files and nothing else. The kit builds and verifies it, and the index
+# proves it as a `context` entry. Rename `id`, keep `requires` with
+# `package-context-v1`, and point `dir` at the directory of exported files.
+
+schema = 1
+id = "pohunek.context.example"
+version = "0.1.0"
+runtime_api = 1
+requires = ["package-context-v1"]
+
+[context]
+dir = "bundle"

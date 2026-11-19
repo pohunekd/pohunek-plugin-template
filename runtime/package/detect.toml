@@ -1,0 +1,20 @@
+# Example activity manifest of the template plugin.
+#
+# Copy of the core plugin-kit fixture shape: one rule per activity the
+# detector reports. Replace the `contains` phrases with phrases of the
+# upstream's real screens, and record a committed screen per phrase in
+# `corpus/`.
+
+[[rules]]
+id = "blocked_approval"
+state = "blocked"
+priority = 200
+region = "whole_recent"
+any = [{ contains = "approve?" }]
+
+[[rules]]
+id = "idle_prompt"
+state = "idle"
+priority = 100
+region = "whole_recent"
+any = [{ contains = "ready" }]

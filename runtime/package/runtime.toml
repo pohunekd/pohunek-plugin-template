@@ -1,0 +1,43 @@
+# Example runtime descriptor of the template plugin.
+#
+# Copy of the core plugin-kit fixture shape: a minimal runtime package the
+# kit lints, builds, verifies, detect-checks and smokes. Rename the `id`
+# fields, point `program` at the locked upstream in `compat/RELEASE`, and
+# record the verified release range in `version_probe`.
+
+schema = 1
+id = "pohunek.runtime.example"
+version = "0.1.0"
+runtime_api = 1
+requires = ["package-context-v1"]
+
+[runtime]
+id = "example"
+name = "Example"
+program = "example"
+args = ["--version"]
+detect_manifest = "detect.toml"
+prompt_arg = true
+# The supported release range below is `[min, below)`; keep it equal to the
+# lock's range in `compat/RELEASE`.
+version_probe = { parser = "semver-v1", args = ["--version"], min = "0.1.0", below = "0.2.0" }
+
+[input]
+bracketed_paste = false
+submit_delay_ms = 0
+text_policy = "unrestricted"
+
+[resume]
+supported = true
+reference_kind = "id"
+args = ["--session", "{reference}"]
+
+[fork]
+supported = false
+
+[native_reference]
+strategy = "assigned"
+launch_args = ["--session-id", "{reference}"]
+
+[native_reference.existence]
+check = "none"
