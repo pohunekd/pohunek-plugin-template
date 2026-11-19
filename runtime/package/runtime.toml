@@ -3,7 +3,10 @@
 # Copy of the core plugin-kit fixture shape: a minimal runtime package the
 # kit lints, builds, verifies, detect-checks and smokes. Rename the `id`
 # fields, point `program` at the locked upstream in `compat/RELEASE`, and
-# record the verified release range in `version_probe`.
+# record the verified release range in `version_probe`. The smoke needs an
+# upstream install that answers `args` with a bare `MAJOR.MINOR.PATCH`
+# triple inside the supported range and prints an `idle_prompt` screen
+# phrase (like `ready`) on launch; CI passes one via `upstream-install`.
 
 schema = 1
 id = "pohunek.runtime.example"
