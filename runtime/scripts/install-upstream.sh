@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Upstream install of the template runtime plugin.
 #
 # Replace this file with the real install of the release pinned in
@@ -11,7 +11,7 @@
 #
 # The CI smoke step runs this script with the repository root as the
 # working directory and `UPSTREAM_BIN` set to an absolute directory; the
-# local smoke check does the same (see the template root README). The
+# local smoke check does the same (see "Local checks" in README.md). The
 # shipped placeholder below installs no real upstream: it writes a
 # self-contained `example` stub that satisfies the smoke contract above, so
 # a repository generated from the template stays green with only the names
@@ -24,11 +24,17 @@ if [ -z "${UPSTREAM_BIN:-}" ]; then
 fi
 mkdir -p "$UPSTREAM_BIN"
 
-version="$(sed -e 's/#.*//' compat/RELEASE | grep -v '^[[:space:]]*$' | tail -n 1)"
+version="$(sed -e 's/#.*//' compat/RELEASE | grep -v '^[[:space:]]*$' | tail -n 1 || true)"
 if [ -z "$version" ]; then
   echo "install-upstream.sh: no release in compat/RELEASE" >&2
   exit 1
 fi
+case "$version" in
+  *[^0-9.]* | "" | *..* | .* | *.)
+    echo "install-upstream.sh: invalid release '$version' in compat/RELEASE (want MAJOR.MINOR.PATCH)" >&2
+    exit 1
+    ;;
+esac
 
 cat > "$UPSTREAM_BIN/example" <<EOF
 #!/bin/sh

@@ -107,7 +107,9 @@ actions):
   `plugin-ci / plugin ci (nightly, x86_64-unknown-linux-gnu)`;
 - a `release` environment gating `v*` tags: `plugin-release.yml`'s publishing
   job declares `environment: release` (from core v0.44.0), so releases wait for
-  approval under its deployment branch and tag rule; set the rule to `v*`;
+  approval by the required reviewers (the repository owner) under its
+  deployment branch and tag rule; set the tag rule to `v*` so only `v*` refs
+  may use the environment;
 - immutable releases on;
 - no secrets in the repository;
 - `id-token: write` and `attestations: write` only in the release job.
