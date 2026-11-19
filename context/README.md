@@ -30,7 +30,8 @@ archive="$(echo dist/*.tar.zst)"
   --sha256 "sha256:$(shasum -a 256 "$archive" | cut -d' ' -f1)"
 ```
 
-The CI (`plugin-ci.yml`) runs the same steps. The context descriptor exports
-no runtime, so the package-level `lint` and any `smoke`/`detect-check` stay
-red or empty for a context package: they are expected to fail or be skipped
-until the core context skip lands (see #2412).
+The CI (`plugin-ci.yml`) runs the same steps for a context package,
+then the version-bump check: lint, double build and compare, verify.
+There is no smoke and no detect-check for a context package (it serves
+no runtime), so the caller must not set `smoke-script`, `upstream-install`
+or `corpus-dir` for one.

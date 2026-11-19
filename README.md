@@ -88,6 +88,9 @@ green (the `release` row builds the kit from that tag).
 
 The runtime `ci.yml` passes `upstream-install: scripts/install-upstream.sh`,
 which installs the upstream pinned in `compat/RELEASE` for the smoke.
+The context `ci.yml` sets none of `smoke-script`, `upstream-install` or
+`corpus-dir`: a context package runs lint, double build and compare,
+verify and the version-bump check only — no smoke, no detect-check.
 
 ## Release
 
