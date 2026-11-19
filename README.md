@@ -39,13 +39,14 @@ package takes `pohunek-plugin` only).
 
 1. Create the repository from this template (the owner creates `pohunekd/*` repositories).
 2. Move the chosen variant's contents, including `.github/`, `.pohunek-plugin/`
-   and `scripts/` (runtime), to the repository root: from the template root run
-   `cp -r <variant>/. <repo>/`, or `git archive HEAD <variant> | tar -x
-   --strip-components=1 -C <repo>` for a checkout of the template tag. The
-   variant `README.md` replaces this root README (`mv <repo>/README.md` out of
-   the way first, then move the variant's `README.md` to the root).
-   `CHANGELOG.md`, `LICENSE` and `CORE_TAG` stay at the root. Delete both
-   variant directories (`rm -rf runtime context`, or `git rm -r` the unused one).
+   and `scripts/` (runtime), to the repository root. From a checkout of this
+   template run `git archive HEAD <variant> | tar -x --strip-components=1 -C
+   <repo>`, or copy with `cp -r <variant>/. <repo>/` from a plain tree copy.
+   The variant's `README.md` lands at the root and replaces this root README;
+   also copy `CHANGELOG.md`, `LICENSE` and `CORE_TAG` from the template root
+   into the new repository. Delete both variant directories (`rm -rf runtime
+   context`) so the root holds `package/`, `.github/`, `.pohunek-plugin/`
+   (plus `corpus/`, `compat/`, `scripts/` for the runtime variant).
 3. Replace every `example` placeholder (and its capitalised and upper-case forms
    where they appear):
    - the repository name (`pohunekd/plugin-example`);
