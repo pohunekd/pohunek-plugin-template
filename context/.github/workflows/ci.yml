@@ -5,7 +5,10 @@ on:
   push:
     branches: [main]
   schedule:
-    # The daily run adds the `previous-minor` row to the pull request rows.
+    # The daily run repeats the pull request rows. The `previous-minor` row
+    # is added once `CORE_TAG` is v0.45.0 or later: the row builds the kit
+    # from the newest release of the previous minor, and only core 0.45 and
+    # later ship `crates/plugin-kit` there (see `plugin-ci.yml`).
     - cron: "17 3 * * *"
   workflow_dispatch:
 
@@ -22,13 +25,10 @@ permissions:
 
 jobs:
   plugin-ci:
-    name: plugin ci
     uses: zajca/pohunek/.github/workflows/plugin-ci.yml@v0.44.0
     with:
       core-tag: v0.44.0
-      rows: >-
-        ${{ github.event_name == 'schedule' && '["release", "previous-minor", "nightly"]'
-            || '["release", "nightly"]' }}
+      rows: '["release", "nightly"]'
       package-dir: package
     permissions:
       contents: read
@@ -50,7 +50,7 @@ jobs:
         run: |
           set -euo pipefail
           body="The scheduled plugin CI run failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID."
-          number="$(gh issue list --repo "$GITHUB_REPOSITORY" --search 'daily CI failing in:title' --json number --jq '.[0].number // empty')"
+          number="$(gh issue list --repo "$GITHUB_REPOSITORY" --search '"daily CI failing" in:title' --json number,title --jq 'map(select(.title == "daily CI failing"))[0].number // empty')"
           if [ -n "$number" ]; then
             gh issue comment "$number" --repo "$GITHUB_REPOSITORY" --body "$body"
           else

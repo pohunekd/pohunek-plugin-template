@@ -1,11 +1,11 @@
-# plugin-example-context
+# plugin-example
 
 Pohunek context plugin: a package that exports a directory of files and
 nothing else.
 
 | | |
 |---|---|
-| Repository | `pohunekd/plugin-example-context` |
+| Repository | `pohunekd/plugin-example` |
 | Package id | `pohunek.context.example` |
 | Runtime id (`--agent`) | none (a context package serves no runtime) |
 | Upstream | none (the `bundle/` directory is the content) |

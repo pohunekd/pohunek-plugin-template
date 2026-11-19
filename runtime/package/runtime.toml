@@ -2,27 +2,27 @@
 #
 # Copy of the core plugin-kit fixture shape: a minimal runtime package the
 # kit lints, builds, verifies, detect-checks and smokes. Rename the `id`
-# fields, point `program` at the locked upstream in `compat/RELEASE`, and
-# record the verified release range in `version_probe`. The smoke needs an
-# upstream install that answers `args` with a bare `MAJOR.MINOR.PATCH`
-# triple inside the supported range and prints an `idle_prompt` screen
-# phrase (like `ready`) on launch; CI passes one via `upstream-install`.
+# fields, point `program` at the upstream binary installed by
+# `scripts/install-upstream.sh`, and record the verified release range in
+# `version_probe`. The smoke needs that install to answer
+# `version_probe.args` with a bare `MAJOR.MINOR.PATCH` triple inside the
+# supported range and to print an `idle_prompt` screen phrase (like `ready`)
+# on launch; CI passes the install via `upstream-install`.
 
 schema = 1
 id = "pohunek.runtime.example"
 version = "0.1.0"
 runtime_api = 1
-requires = ["package-context-v1"]
 
 [runtime]
 id = "example"
 name = "Example"
 program = "example"
-args = ["--version"]
+args = []
 detect_manifest = "detect.toml"
 prompt_arg = true
-# The supported release range below is `[min, below)`; keep it equal to the
-# lock's range in `compat/RELEASE`.
+# The supported release range below is `[min, below)`; the range contains the
+# release locked in `compat/RELEASE` (`min` is at most the lock).
 version_probe = { parser = "semver-v1", args = ["--version"], min = "0.1.0", below = "0.2.0" }
 
 [input]

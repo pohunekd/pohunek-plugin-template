@@ -2,5 +2,6 @@
 #
 # The upstream release the descriptor's `version_probe` range is verified
 # against. Replace the release id with the pinned upstream release and keep
-# the descriptor's `min`/`below` range equal to this lock.
+# the descriptor's `min`/`below` range containing this lock (`min` is at
+# most the lock).
 0.1.0
