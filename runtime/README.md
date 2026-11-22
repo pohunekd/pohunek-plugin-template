@@ -10,7 +10,14 @@ Pohunek plugin for the example upstream.
 | Upstream | Example upstream release pinned in `compat/RELEASE` |
 | Status | **template**: rename the placeholders and verify against the locked upstream |
 
-Install by id (after admission): `pohunek plugin install pohunek.runtime.example`.
+## Install
+
+Once this package is admitted in the official plugin index, open this section
+with one copy-paste command for the current release:
+
+```bash
+pohunek plugin install pohunek.runtime.example
+```
 
 ## Local checks
 

@@ -20,6 +20,13 @@ an official repository is `pohunekd/plugin-<name>` with `<name>` in kebab-case
 `v<package version>`. Topics: `pohunek-plugin` and `pohunek-runtime` (a context
 package takes `pohunek-plugin` only).
 
+A generated plugin README opens its install section with one copy-paste command
+that installs the current release: install by package id once the package is
+admitted in the official plugin index (`pohunek plugin install <package-id>`, a
+dry run that prints the resolved `<package-id>@<version>`, repeated with `--yes`
+to install), and until then the release download plus `SHA256SUMS` check and
+archive install with no placeholders.
+
 ## Variants
 
 - `runtime/` is a runtime package skeleton: a descriptor (`package/runtime.toml`)

@@ -11,7 +11,14 @@ nothing else.
 | Upstream | none (the `bundle/` directory is the content) |
 | Status | **template**: rename the placeholders and fill in `bundle/` |
 
-Install by id (after admission): `pohunek plugin install pohunek.context.example`.
+## Install
+
+Once this package is admitted in the official plugin index, open this section
+with one copy-paste command for the current release:
+
+```bash
+pohunek plugin install pohunek.context.example
+```
 
 ## Local checks
 
